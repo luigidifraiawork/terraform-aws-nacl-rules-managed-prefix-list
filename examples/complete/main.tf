@@ -35,6 +35,7 @@ module "nacl_s3_pl" {
 
   service_name = "s3"
   start_offset = 200
+  direction    = "inbound"
 }
 
 ################################################################################

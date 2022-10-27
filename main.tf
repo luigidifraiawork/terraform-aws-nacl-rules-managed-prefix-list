@@ -10,8 +10,8 @@ resource "null_resource" "this" {
   triggers = {
     rule_number = var.start_offset + count.index
     rule_action = "allow"
-    from_port   = 1024
-    to_port     = 65535
+    from_port   = var.direction == "inbound" ? 1024 : 443
+    to_port     = var.direction == "inbound" ? 65535 : 443
     protocol    = "tcp"
     cidr_block  = element(data.aws_ec2_managed_prefix_list.this.entries.*.cidr, count.index)
   }
