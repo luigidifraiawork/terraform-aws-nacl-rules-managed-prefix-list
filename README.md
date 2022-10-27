@@ -1,10 +1,10 @@
 # NACL rules for AWS prefix lists
-This module provides NACL rules for a specific AWS prefix list (`s3` or `dynamodb`) in the current region. Its output, `rules`, of type `list(map(string))`, can be used to populate the `private_inbound_acl_rules` input variable of the [terraform-aws-modules/vpc/aws module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest), possibly using Terraform's `concat` function to include user-defined inbound rules too.
+This module provides either inbound or outbound NACL rules for a specific AWS prefix list (`s3` or `dynamodb`) in the current region. Its output, `rules`, of type `list(map(string))`, can be used to e.g. populate the `private_inbound_acl_rules`/`private_outbound_acl_rules` input variables of the [terraform-aws-modules/vpc/aws module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest), possibly using Terraform's `concat` function to include user-defined rules too.
 
-As an example: for the AWS S3 service, including the output of this module to `private_inbound_acl_rules` allows the **response** traffic from a VPC endpoint for S3 to enter private subnets of the VPC in question.
+As an example: for the AWS S3 service, including the output of this module to `private_inbound_acl_rules` allows the **response** traffic from a VPC Gateway endpoint for S3 to enter private subnets of the VPC in question.
 
 ## Examples
-- [Complete](https://github.com/luigidifraiawork/terraform-aws-nacl-rules-managed-prefix-list/tree/master/examples/complete) - Create Lambda Function, VPC, VPC Endpoint for S3, and NACL rules to allow response traffic from the S3 service to private subnets.
+- [Complete](https://github.com/luigidifraiawork/terraform-aws-nacl-rules-managed-prefix-list/tree/master/examples/complete) - Create VPC, VPC Gateway Endpoint for S3, and NACL rules to allow response traffic from the S3 service to intra subnets.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -38,6 +38,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_direction"></a> [direction](#input\_direction) | Direction of NACL rules (inbound or outbound) | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the AWS service to retrieve the prefix list for | `string` | n/a | yes |
 | <a name="input_start_offset"></a> [start\_offset](#input\_start\_offset) | Start offset to use for NACL rules | `number` | n/a | yes |
 

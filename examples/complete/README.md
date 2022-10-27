@@ -1,6 +1,6 @@
 # AWS Lambda with VPC and VPC Endpoint for S3 example
 
-The configuration in this directory creates a VPC with a VPC Endpoint for S3 and no Internet access. Furthermore, NACL rules are created to allow response traffic to access VPC subnets.
+The configuration in this directory creates a VPC with a VPC Gateway Endpoint for S3 and no Internet access. Furthermore, NACL rules are created to allow response traffic to access VPC intra subnets.
 
 ## Usage
 
