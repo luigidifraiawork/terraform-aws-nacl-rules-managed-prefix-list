@@ -1,7 +1,7 @@
 # NACL rules for AWS prefix lists
-This module provides either inbound or outbound NACL rules for a specific AWS prefix list (`s3` or `dynamodb`) in the current region. Its output, `rules`, of type `list(map(string))`, can be used to e.g. populate the `private_inbound_acl_rules`/`private_outbound_acl_rules` input variables of the [terraform-aws-modules/vpc/aws module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest), possibly using Terraform's `concat` function to include user-defined rules too.
+This module provides either inbound or outbound NACL rules for a specific AWS prefix list (`s3` or `dynamodb`) in the current region. Its output, `rules`, of type `list(map(string))`, can be used to e.g. populate the `intra_inbound_acl_rules`/`intra_outbound_acl_rules` input variables of the [terraform-aws-modules/vpc/aws module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest), possibly using Terraform's `concat` function to include user-defined rules too.
 
-As an example: for the AWS S3 service, including the output of this module to `private_inbound_acl_rules` allows the **response** traffic from a VPC Gateway endpoint for S3 to enter private subnets of the VPC in question.
+As an example: for the AWS S3 service, including the output of this module to `intra_inbound_acl_rules` allows the **response** traffic from a VPC Gateway endpoint for S3 to enter intra subnets of the VPC in question.
 
 ## Examples
 - [Complete](https://github.com/luigidifraiawork/terraform-aws-nacl-rules-managed-prefix-list/tree/master/examples/complete) - Create VPC, VPC Gateway Endpoint for S3, and NACL rules to allow response traffic from the S3 service to intra subnets.
